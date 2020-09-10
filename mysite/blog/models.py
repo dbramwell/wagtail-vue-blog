@@ -52,7 +52,7 @@ class BlogPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('date'),
         FieldPanel('intro'),
-        StreamFieldPanel('body', classname="full"),
+        StreamFieldPanel('body'),
     ]
 
     api_fields = [

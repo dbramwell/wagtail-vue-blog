@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-blogpage{% endblock %}
+
+{% block content %}
+    <h1>{{ page.title }}</h1>
+    <p class="meta">{{ page.date }}</p>
+
+    <div class="intro">{{ page.intro }}</div>
+
+    {% for block in page.body %}
+    <p>for poo</p>
+        <div>
+            {% if block.block_type == 'heading' %}
+                <h1>{{ block.value }}</h1>
+            {% elif block.block_type == 'paragraph' %}
+                <section class="block-{{ block.block_type }}">
+                    {% include_block block %}
+                </section>
+            {% else %}
+                <h4>{{ block.value.name }}</h4>
+                {% for image in block.value.images %}
+                    <div style="float: left; margin: 10px">
+                        {% image image.image fill-320x240 %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    {% endfor %}
+    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
+
+{% endblock %}

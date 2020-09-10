@@ -33,7 +33,12 @@ services:
       - db
   frontend:
     build: ./frontend
-    command: npm run serve
+    command:
+      - /bin/bash
+      - -c
+      - |
+        npm install
+        npm run serve
     volumes:
       - ./frontend:/app:delegated,rw
     ports:
